@@ -1,22 +1,39 @@
 import pool from '../../../server';
 import { TDepartment } from './department.interface';
 
+// create departments
 const createDepartmentIntoDB = async (payload: TDepartment) => {
   const { id, name } = payload;
   const sql = `INSERT INTO app1.departments (id, name) 
                 VALUES ($1, $2)
                 RETURNING *`;
   const client = await pool.query(sql, [id, name]);
-  console.log(client.rows, 'from line 11 service');
   return client.rows[0];
 };
+
+// get all departments
 const getDepartmentsFromDB = async () => {
   const sql = `SELECT * FROM app1.departments`;
   const client = await pool.query(sql);
   return client.rows;
 };
 
+// update a specific department
+const updateDepartmentsFromDB = async (id: number, name: string) => {
+  const selectSql = `SELECT * FROM app1.departments WHERE id = $1`;
+  const isExist = await pool.query(selectSql, [id]);
+  if (isExist.rows?.length === 0) {
+    throw new Error(`Department with id ${id} does not exist`);
+  }
+
+  const updatedSql = `UPDATE app1.departments SET name = $2 WHERE id = $1
+    RETURNING *`;
+  const client = await pool.query(updatedSql, [id, name]);
+  return client.rows[0];
+};
+
 export const DepartmentServices = {
   createDepartmentIntoDB,
   getDepartmentsFromDB,
+  updateDepartmentsFromDB,
 };
