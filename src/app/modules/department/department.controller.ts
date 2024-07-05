@@ -57,9 +57,29 @@ const updateDocument = async (req: Request, res: Response) => {
     });
   }
 };
+const deleteDocument = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const result = await DepartmentServices.deleteDepartmentsFromDB(
+      Number(id),
+    );
+    res.status(200).json({
+      success: true,
+      message: 'Department Deleted successfully',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || 'Something went wrong!!',
+      error,
+    });
+  }
+};
 
 export const DepartmentControllers = {
   createDepartment,
   getAllDepartments,
   updateDocument,
+  deleteDocument
 };

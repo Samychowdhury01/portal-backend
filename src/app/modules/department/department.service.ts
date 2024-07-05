@@ -7,15 +7,15 @@ const createDepartmentIntoDB = async (payload: TDepartment) => {
   const sql = `INSERT INTO app1.departments (id, name) 
                 VALUES ($1, $2)
                 RETURNING *`;
-  const client = await pool.query(sql, [id, name]);
-  return client.rows[0];
+  const result = await pool.query(sql, [id, name]);
+  return result.rows[0];
 };
 
 // get all departments
 const getDepartmentsFromDB = async () => {
   const sql = `SELECT * FROM app1.departments`;
-  const client = await pool.query(sql);
-  return client.rows;
+  const result = await pool.query(sql);
+  return result.rows;
 };
 
 // update a specific department
@@ -28,12 +28,27 @@ const updateDepartmentsFromDB = async (id: number, name: string) => {
 
   const updatedSql = `UPDATE app1.departments SET name = $2 WHERE id = $1
     RETURNING *`;
-  const client = await pool.query(updatedSql, [id, name]);
-  return client.rows[0];
+  const result = await pool.query(updatedSql, [id, name]);
+  return result.rows[0];
+};
+
+// delete a specific department
+const deleteDepartmentsFromDB = async (id: number) => {
+  const selectSql = `SELECT * FROM app1.departments WHERE id = $1`;
+  const isExist = await pool.query(selectSql, [id]);
+  if (isExist.rows?.length === 0) {
+    throw new Error(`Department with id ${id} does not exist`);
+  }
+
+  const deleteSql = `DELETE FROM app1.departments WHERE id = $1
+    RETURNING *`;
+  const result = await pool.query(deleteSql, [id]);
+  return result.rows[0];
 };
 
 export const DepartmentServices = {
   createDepartmentIntoDB,
   getDepartmentsFromDB,
   updateDepartmentsFromDB,
+  deleteDepartmentsFromDB,
 };
