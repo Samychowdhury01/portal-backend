@@ -2,6 +2,7 @@
 import { Request, Response } from 'express';
 import { DepartmentServices } from './department.service';
 
+// create department
 const createDepartment = async (req: Request, res: Response) => {
   try {
     const department = req.body;
@@ -20,6 +21,7 @@ const createDepartment = async (req: Request, res: Response) => {
   }
 };
 
+// get all departments
 const getAllDepartments = async (req: Request, res: Response) => {
   try {
     const result = await DepartmentServices.getDepartmentsFromDB();
@@ -36,7 +38,27 @@ const getAllDepartments = async (req: Request, res: Response) => {
     });
   }
 };
-const updateDocument = async (req: Request, res: Response) => {
+// get department by id
+const getSingleDepartment = async (req: Request, res: Response) => {
+  try {
+    const {id} = req.params
+    const result = await DepartmentServices.getSingleDepartmentFromDB(Number(id));
+    res.status(200).json({
+      success: true,
+      message: 'Department fetched successfully',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || 'Something went wrong!!',
+      error,
+    });
+  }
+};
+
+// update Department
+const updateDepartment = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { name } = req.body;
@@ -57,7 +79,7 @@ const updateDocument = async (req: Request, res: Response) => {
     });
   }
 };
-const deleteDocument = async (req: Request, res: Response) => {
+const deleteDepartment = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const result = await DepartmentServices.deleteDepartmentsFromDB(
@@ -80,6 +102,7 @@ const deleteDocument = async (req: Request, res: Response) => {
 export const DepartmentControllers = {
   createDepartment,
   getAllDepartments,
-  updateDocument,
-  deleteDocument
+  getSingleDepartment,
+  updateDepartment,
+  deleteDepartment
 };

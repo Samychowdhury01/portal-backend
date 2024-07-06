@@ -5,7 +5,8 @@ const router = Router()
 
 router.post('/', DepartmentControllers.createDepartment)
 router.get('/', DepartmentControllers.getAllDepartments)
-router.put('/:id', DepartmentControllers.updateDocument)
-router.delete('/:id', DepartmentControllers.deleteDocument)
+router.get('/:id', DepartmentControllers.getSingleDepartment)
+router.put('/:id', DepartmentControllers.updateDepartment)
+router.delete('/:id', DepartmentControllers.deleteDepartment)
 
 export const DepartmentRouter = router

@@ -18,6 +18,15 @@ const getDepartmentsFromDB = async () => {
   return result.rows;
 };
 
+// get department by id
+const getSingleDepartmentFromDB = async (id: number,) => {
+  const selectSql = `SELECT * FROM app1.departments WHERE id = $1`;
+  const isExist = await pool.query(selectSql, [id]);
+  if (isExist.rows?.length === 0) {
+    throw new Error(`Department with id ${id} does not exist`);
+  }
+  return isExist.rows[0]
+}
 // update a specific department
 const updateDepartmentsFromDB = async (id: number, name: string) => {
   const selectSql = `SELECT * FROM app1.departments WHERE id = $1`;
@@ -49,6 +58,7 @@ const deleteDepartmentsFromDB = async (id: number) => {
 export const DepartmentServices = {
   createDepartmentIntoDB,
   getDepartmentsFromDB,
+  getSingleDepartmentFromDB,
   updateDepartmentsFromDB,
   deleteDepartmentsFromDB,
 };
