@@ -21,6 +21,7 @@ const createEmployeeIntoDB = async (payload: TEmployee) => {
 const getEmployeesFromDB = async () => {
   const sql = `
   SELECT 
+    e.first_name || '' || e.last_name AS full_name,
     e.first_name,
     e.last_name,
     e.email,

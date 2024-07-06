@@ -21,23 +21,24 @@ const createEmployee = async (req: Request, res: Response) => {
   }
 };
 
-// // get all departments
-// const getAllEmployees = async (req: Request, res: Response) => {
-//   try {
-//     const result = await DepartmentServices.getDepartmentsFromDB();
-//     res.status(200).json({
-//       success: true,
-//       message: 'Department fetched successfully',
-//       data: result,
-//     });
-//   } catch (error: any) {
-//     res.status(400).json({
-//       success: false,
-//       message: error.message || 'Something went wrong!!',
-//       error,
-//     });
-//   }
-// };
+// get all departments
+const getAllEmployees = async (req: Request, res: Response) => {
+  try {
+    const result = await EmployeeServices.getEmployeesFromDB();
+    res.status(200).json({
+      success: true,
+      message: 'Department fetched successfully',
+      data: result,
+    });
+    console.log(result);
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || 'Something went wrong!!',
+      error,
+    });
+  }
+};
 // // get department by id
 // const getSingleDepartment = async (req: Request, res: Response) => {
 //   try {
@@ -101,7 +102,7 @@ const createEmployee = async (req: Request, res: Response) => {
 
 export const EmployeeControllers = {
   createEmployee,
-  // getAllEmployees,
+  getAllEmployees,
   // getSingleDepartment,
   // updateDepartment,
   // deleteDepartment
