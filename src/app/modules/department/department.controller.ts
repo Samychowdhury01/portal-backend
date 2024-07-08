@@ -41,8 +41,10 @@ const getAllDepartments = async (req: Request, res: Response) => {
 // get department by id
 const getSingleDepartment = async (req: Request, res: Response) => {
   try {
-    const {id} = req.params
-    const result = await DepartmentServices.getSingleDepartmentFromDB(Number(id));
+    const { id } = req.params;
+    const result = await DepartmentServices.getSingleDepartmentFromDB(
+      Number(id),
+    );
     res.status(200).json({
       success: true,
       message: 'Department fetched successfully',
@@ -62,7 +64,7 @@ const updateDepartment = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { name } = req.body;
-    const result = await DepartmentServices.updateDepartmentsFromDB(
+    const result = await DepartmentServices.updateDepartmentFromDB(
       Number(id),
       name,
     );
@@ -82,9 +84,7 @@ const updateDepartment = async (req: Request, res: Response) => {
 const deleteDepartment = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const result = await DepartmentServices.deleteDepartmentsFromDB(
-      Number(id),
-    );
+    const result = await DepartmentServices.deleteDepartmentFromDB(Number(id));
     res.status(200).json({
       success: true,
       message: 'Department Deleted successfully',
@@ -104,5 +104,5 @@ export const DepartmentControllers = {
   getAllDepartments,
   getSingleDepartment,
   updateDepartment,
-  deleteDepartment
+  deleteDepartment,
 };

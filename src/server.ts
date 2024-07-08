@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Pool } from 'pg';
 import app from './app';
 import config from './app/config';

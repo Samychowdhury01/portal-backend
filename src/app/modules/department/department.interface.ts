@@ -1,4 +1,4 @@
 export type TDepartment = {
-    id: number;
-    name: string;
-}
+  id: number;
+  name: string;
+};

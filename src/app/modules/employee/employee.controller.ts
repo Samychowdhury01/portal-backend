@@ -30,7 +30,6 @@ const getAllEmployees = async (req: Request, res: Response) => {
       message: 'Department fetched successfully',
       data: result,
     });
-    console.log(result);
   } catch (error: any) {
     res.status(400).json({
       success: false,
@@ -59,51 +58,49 @@ const getAllEmployees = async (req: Request, res: Response) => {
 // };
 
 // // update Department
-// const updateDepartment = async (req: Request, res: Response) => {
-//   try {
-//     const { id } = req.params;
-//     const { name } = req.body;
-//     const result = await DepartmentServices.updateDepartmentsFromDB(
-//       Number(id),
-//       name,
-//     );
-//     res.status(200).json({
-//       success: true,
-//       message: 'Department updated successfully',
-//       data: result,
-//     });
-//   } catch (error: any) {
-//     res.status(400).json({
-//       success: false,
-//       message: error.message || 'Something went wrong!!',
-//       error,
-//     });
-//   }
-// };
-// const deleteDepartment = async (req: Request, res: Response) => {
-//   try {
-//     const { id } = req.params;
-//     const result = await DepartmentServices.deleteDepartmentsFromDB(
-//       Number(id),
-//     );
-//     res.status(200).json({
-//       success: true,
-//       message: 'Department Deleted successfully',
-//       data: result,
-//     });
-//   } catch (error: any) {
-//     res.status(400).json({
-//       success: false,
-//       message: error.message || 'Something went wrong!!',
-//       error,
-//     });
-//   }
-// };
+const updateEmployee = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+    const result = await EmployeeServices.updateEmployeeFromDB(
+      Number(id),
+      data,
+    );
+    res.status(200).json({
+      success: true,
+      message: 'Department updated successfully',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || 'Something went wrong!!',
+      error,
+    });
+  }
+};
+const deleteEmployee = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const result = await EmployeeServices.deleteEmployeeFromDB(Number(id));
+    res.status(200).json({
+      success: true,
+      message: 'Employee Deleted successfully',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || 'Something went wrong!!',
+      error,
+    });
+  }
+};
 
 export const EmployeeControllers = {
   createEmployee,
   getAllEmployees,
   // getSingleDepartment,
-  // updateDepartment,
-  // deleteDepartment
+  updateEmployee,
+  deleteEmployee,
 };
