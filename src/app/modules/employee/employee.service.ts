@@ -51,7 +51,7 @@ const getSingleEmployeeFromDB = async (id: number) => {
   return isExist.rows[0];
 };
 
-// // update a specific Employee
+// update a specific Employee
 const updateEmployeeFromDB = async (id: number, payload: any) => {
   const { first_name, last_name, email, job_title, department_id } = payload;
 

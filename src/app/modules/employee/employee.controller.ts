@@ -104,3 +104,4 @@ export const EmployeeControllers = {
   updateEmployee,
   deleteEmployee,
 };
+
