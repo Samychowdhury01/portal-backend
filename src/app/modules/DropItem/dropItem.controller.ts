@@ -4,6 +4,7 @@ import { DropItemsServices } from './dropItem.service';
 const createDropItem: RequestHandler = async (req, res) => {
   try {
     const itemData = req.body;
+    console.log(itemData);
     const result = await DropItemsServices.createItemIntoDB(itemData);
     res.status(200).json({
       success: true,
@@ -39,7 +40,6 @@ const getDropItems: RequestHandler = async (req, res) => {
 const updateItems: RequestHandler = async (req, res) => {
   try {
     const items = req.body;
-    console.log(items);
     const result = await DropItemsServices.updateItemsFromDB(items);
     console.log(result);
     res.status(200).json({

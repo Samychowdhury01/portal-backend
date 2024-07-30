@@ -1,9 +1,9 @@
 export type TDropItems = {
   id?: number
   username: string;
-  jobTitle: string;
+  job_title: string;
   email: string;
-  departmentId: number;
+  department_id: number;
   expanded: boolean,
-  item_order: number
+  item_order?: number
 };
