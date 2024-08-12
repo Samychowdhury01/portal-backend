@@ -57,7 +57,7 @@ const getAllEmployees = async (req: Request, res: Response) => {
 //   }
 // };
 
-// // update Department
+// update Department
 const updateEmployee = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

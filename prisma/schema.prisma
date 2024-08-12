@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model departments {
+  id   Int    @id
+  name String @db.VarChar
+}
+
+model employees {
+  id            Int    @id @default(autoincrement())
+  first_name    String @db.VarChar
+  last_name     String @db.VarChar
+  email         String @db.VarChar
+  job_title     String @db.VarChar
+  department_id Int?
+}
+
+model items {
+  id            Int    @id(map: "dropItems_pkey") @default(autoincrement())
+  username      String @db.VarChar
+  job_title     String @db.VarChar
+  email         String @db.VarChar
+  department_id Int
+}
+
+model items_order {
+  id          Int     @id @default(autoincrement())
+  employee_id Int
+  expanded    Boolean
+  item_order  Int
+}
+
