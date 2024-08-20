@@ -16,14 +16,14 @@ model employees {
   id            Int    @id @default(autoincrement())
   first_name    String @db.VarChar
   last_name     String @db.VarChar
-  email         String @db.VarChar
+  email         String @unique @db.VarChar
   job_title     String @db.VarChar
-  department_id Int?
+  department_id Int
 }
 
 model items {
   id            Int    @id(map: "dropItems_pkey") @default(autoincrement())
-  username      String @db.VarChar
+  username      String @unique @db.VarChar
   job_title     String @db.VarChar
   email         String @db.VarChar
   department_id Int
@@ -31,8 +31,7 @@ model items {
 
 model items_order {
   id          Int     @id @default(autoincrement())
-  employee_id Int
+  employee_id Int @unique
   expanded    Boolean
   item_order  Int
 }
-

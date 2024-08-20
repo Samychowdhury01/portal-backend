@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { EmployeeServices } from './employee.service';
@@ -61,10 +62,11 @@ const getAllEmployees = async (req: Request, res: Response) => {
 const updateEmployee = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const data = req.body;
+    const { id: employeeId, ...restData } = req.body;
+
     const result = await EmployeeServices.updateEmployeeFromDB(
       Number(id),
-      data,
+      restData,
     );
     res.status(200).json({
       success: true,
@@ -104,4 +106,3 @@ export const EmployeeControllers = {
   updateEmployee,
   deleteEmployee,
 };
-

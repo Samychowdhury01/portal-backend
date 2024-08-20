@@ -4,7 +4,7 @@ import { DropItemsServices } from './dropItem.service';
 const createDropItem: RequestHandler = async (req, res) => {
   try {
     const itemData = req.body;
-    console.log(itemData);
+
     const result = await DropItemsServices.createItemIntoDB(itemData);
     res.status(200).json({
       success: true,
@@ -98,5 +98,5 @@ export const DropItemsControllers = {
   getDropItems,
   updateItems,
   updateItemsOrder,
-  deleteItem
+  deleteItem,
 };

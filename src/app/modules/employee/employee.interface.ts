@@ -1,7 +1,7 @@
 export type TEmployee = {
-  firstName: string;
-  lastName: string;
+  first_name: string;  
+  last_name: string;   
   email: string;
-  jobTitle: string;
-  departmentId: number;
+  job_title: string;
+  department_id: number;  
 };
